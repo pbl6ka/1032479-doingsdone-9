@@ -1,6 +1,8 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -70,10 +72,16 @@ $show_complete_tasks = rand(0, 1);
                         <a href="/" class="tasks-switch__item">Просроченные</a>
                     </nav>
 
-                    <label class="checkbox">
+                    <label class="checkbox"> 
                         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-                        <input class="checkbox__input visually-hidden show_completed" type="checkbox">
-                        <span class="checkbox__text">Показывать выполненные</span>
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox"
+                                                <?php 
+                                                if ($show_complete_tasks == 1) {
+                                                    print('checked');
+                                                }
+                                                    ?>
+                                                >
+                        <span class="checkbox__text">Показать выполненные</span>
                     </label>
                 </div>
 
@@ -93,12 +101,23 @@ $show_complete_tasks = rand(0, 1);
                         <td class="task__date"></td>
                     </tr>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+                    <?php if ($show_complete_tasks == 1): ?>
+                    <tr class="tasks__item task task--completed">
+                        <td class="task__select">
+                            <label class="checkbox task__checkbox">
+                                <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                                <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
+                            </label>
+                        </td>
+                        <td class="task__date">10.10.2019</td>
+                        <td class="task__controls"></td>
+                    </tr>
+                    <?php endif; ?>
                 </table>
             </main>
         </div>
     </div>
 </div>
-
 <footer class="main-footer">
     <div class="container">
         <div class="main-footer__copyright">
@@ -162,3 +181,4 @@ $show_complete_tasks = rand(0, 1);
 <script src="script.js"></script>
 </body>
 </html>
+
